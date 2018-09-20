@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package csv.trabalho;
+package csv;
 
 import java.io.FileWriter;
 import java.util.Arrays;
@@ -24,11 +24,12 @@ public class CVSUtilExample {
         //custom separator + quote
         CSVUtils.writeLine(writer, Arrays.asList("aaa", "bb,b", "cc,c"), ',', '"');
 
-        //custom separator + quote
+//        //custom separator + quote
         CSVUtils.writeLine(writer, Arrays.asList("aaa", "bbb", "cc,c"), '|', '\'');
-
-        //double-quotes
+//
+//        //double-quotes
         CSVUtils.writeLine(writer, Arrays.asList("aaa", "bbb", "cc\"c"));
+        CSVUtils.writeLine(writer, Arrays.asList("111", "bbb", "cc\"c"));
 
 
         writer.flush();

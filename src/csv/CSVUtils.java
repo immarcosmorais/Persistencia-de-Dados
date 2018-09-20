@@ -3,14 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package csv.trabalho;
+package csv;
 
 /**
  *
  * @author marcos
  */
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CSVUtils {
@@ -25,7 +30,6 @@ public class CSVUtils {
         writeLine(w, values, separators, ' ');
     }
 
-    //https://tools.ietf.org/html/rfc4180
     private static String followCVSformat(String value) {
 
         String result = value;
@@ -60,7 +64,22 @@ public class CSVUtils {
         }
         sb.append("\n");
         w.append(sb.toString());
-
     }
+    
+    public static ArrayList<String[]> readFile(String path) throws FileNotFoundException, IOException{
+        BufferedReader br = null;
+        String line = "";
+        br = new BufferedReader(new FileReader(new File(path).getCanonicalPath()));
+        ArrayList<String[]> file = new ArrayList();
+        while((line = br.readLine()) != null){
+            String[] transaction = line.split("" + DEFAULT_SEPARATOR);
+            file.add(transaction);
+        }
+        return file;
+    }
+    
+//    public static void main(String[] args) throws IOException {
+//        ArrayList<String[]> file = readFile("../Persistencia/src/csv/trabalho15Set/arquivos/hygdata_v3.csv");
+//    }
 
 }
