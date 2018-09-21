@@ -59,6 +59,7 @@ public class App {
     }
 
     private static void imprime(ArrayList<String[]> lista) {
+
         for (String[] l : lista) {
             System.out.print("[");
             for (String l1 : l) {
@@ -67,10 +68,55 @@ public class App {
             System.out.println("]");
         }
     }
-    
+
+    /**
+     * Mostre na tela as dez estrelas mais próximas da Terra (use o campo dist)
+     *
+     * @param catalogo
+     */
+    private static void estrelasMaisProximas(ArrayList<String[]> catalogo) {
+        ArrayList<String[]> lista = new ArrayList<>();
+        lista.add(catalogo.get(0));
+        lista.add(catalogo.get(1));
+        catalogo.remove(0);
+        for (String[] c : catalogo) {
+            for (int i = 1; i < lista.size(); i++) {
+                if (Float.parseFloat(lista.get(i)[9]) < Float.parseFloat(c[9])) {
+//                    lista.remove(i);
+                    lista.add(i, c);
+//                    lista = insertSort(lista);
+                    break;
+                }
+            }
+            if (lista.size() == 11) {
+                break;
+            }
+        }
+        imprime(lista);
+
+    }
+
+    private static ArrayList<String[]> insertSort(ArrayList<String[]> lista) {
+        for (int i = 2; i < lista.size(); i++) {
+            float aux = Float.parseFloat(lista.get(i)[9]);
+            String[] itemAux = lista.get(i);
+            int j = i;
+            while ((j > 1) && (Float.parseFloat(lista.get((j - 1))[9])) > aux) {
+                lista.remove(j);
+                String[] item = lista.get(j - 1);
+                lista.add(j, item);
+                j--;
+            }
+            lista.remove(itemAux);
+        }
+        return lista;
+    }
+
     public static void main(String[] args) throws IOException {
         ArrayList<String[]> catalogo = CSVUtils.readFile("../Persistencia/src/csv/trabalho15Set/arquivos/hygdata_v3.csv");
 //        classificaMagnetude(catalogo);
 //        estrelasVisiveis(catalogo);
+        estrelasMaisProximas(catalogo);
     }
+
 }
