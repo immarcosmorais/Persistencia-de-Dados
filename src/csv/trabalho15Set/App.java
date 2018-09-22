@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 /**
  *
@@ -67,6 +68,7 @@ public class App {
             }
             System.out.println("]");
         }
+        System.out.println("");
     }
 
     /**
@@ -82,9 +84,7 @@ public class App {
         for (String[] c : catalogo) {
             for (int i = 1; i < lista.size(); i++) {
                 if (Float.parseFloat(lista.get(i)[9]) < Float.parseFloat(c[9])) {
-//                    lista.remove(i);
                     lista.add(i, c);
-//                    lista = insertSort(lista);
                     break;
                 }
             }
@@ -96,27 +96,62 @@ public class App {
 
     }
 
-    private static ArrayList<String[]> insertSort(ArrayList<String[]> lista) {
-        for (int i = 2; i < lista.size(); i++) {
-            float aux = Float.parseFloat(lista.get(i)[9]);
-            String[] itemAux = lista.get(i);
-            int j = i;
-            while ((j > 1) && (Float.parseFloat(lista.get((j - 1))[9])) > aux) {
-                lista.remove(j);
-                String[] item = lista.get(j - 1);
-                lista.add(j, item);
-                j--;
+    /**
+     * Escreva um programa que permita pesquisar estrelas no catálogo HYG
+     * através da constelação(campo con)
+     *
+     * @param catalogo
+     * @param constelacao
+     */
+    private static void pesquisaConstelacao(ArrayList<String[]> catalogo, String constelacao) {
+
+        ArrayList<String[]> lista = new ArrayList<>();
+        lista.add(catalogo.get(0));
+        catalogo.remove(0);
+        //29
+        for (String[] c : catalogo) {
+            if (c[29].equalsIgnoreCase(constelacao)) {
+                lista.add(c);
             }
-            lista.remove(itemAux);
         }
-        return lista;
+        imprime(lista);
     }
 
     public static void main(String[] args) throws IOException {
         ArrayList<String[]> catalogo = CSVUtils.readFile("../Persistencia/src/csv/trabalho15Set/arquivos/hygdata_v3.csv");
-//        classificaMagnetude(catalogo);
-//        estrelasVisiveis(catalogo);
+        classificaMagnetude(catalogo);
+        estrelasVisiveis(catalogo);
         estrelasMaisProximas(catalogo);
+        String constelacao;
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Constelacao: ");
+        constelacao = sc.next();
+        pesquisaConstelacao(catalogo, constelacao);
+        escorpiao(catalogo);
+    }
+
+    /**
+     * Escreva um programa que imprima na tela os dados da estrela mais
+     * brilhante (menor absmag) da constelação de escorpião (sco no campo con)
+     *
+     * @param catalogo
+     */
+    private static void escorpiao(ArrayList<String[]> catalogo) {
+        ArrayList<String[]> lista = new ArrayList<>();
+        lista.add(catalogo.get(0));
+        catalogo.remove(0);
+        String[] dados = catalogo.get(1);
+        //29
+        for (String[] c : catalogo) {
+            //14
+            if (c[29].equalsIgnoreCase("sco")) {
+                if (Float.parseFloat(c[14]) < Float.parseFloat(dados[14])) {
+                    dados = c;
+                }
+            }
+        }
+        lista.add(dados);
+        imprime(lista);
     }
 
 }
