@@ -26,6 +26,7 @@ public class App {
      * @param catalogo
      */
     public static void classificaMagnetude(ArrayList<String[]> catalogo) {
+        System.out.println("Exercicio 1");
         ArrayList<String[]> lista = new ArrayList<>();
         lista.add(catalogo.get(0));
         catalogo.remove(0);
@@ -47,6 +48,7 @@ public class App {
      * @param catalogo
      */
     private static void estrelasVisiveis(ArrayList<String[]> catalogo) throws IOException {
+        System.out.println("Exercicio 2");
         FileWriter writer = new FileWriter("exercicio2.csv");
         CSVUtils.writeLine(writer, Arrays.asList(catalogo.get(0)));
         catalogo.remove(0);
@@ -77,6 +79,7 @@ public class App {
      * @param catalogo
      */
     private static void estrelasMaisProximas(ArrayList<String[]> catalogo) {
+        System.out.println("Exercicio 3");
         ArrayList<String[]> lista = new ArrayList<>();
         lista.add(catalogo.get(0));
         lista.add(catalogo.get(1));
@@ -103,8 +106,9 @@ public class App {
      * @param catalogo
      * @param constelacao
      */
+    
     private static void pesquisaConstelacao(ArrayList<String[]> catalogo, String constelacao) {
-
+        System.out.println("Exercicio 4");
         ArrayList<String[]> lista = new ArrayList<>();
         lista.add(catalogo.get(0));
         catalogo.remove(0);
@@ -137,6 +141,7 @@ public class App {
      * @param catalogo
      */
     private static void escorpiao(ArrayList<String[]> catalogo) {
+        System.out.println("Exercicio 5");
         ArrayList<String[]> lista = new ArrayList<>();
         lista.add(catalogo.get(0));
         catalogo.remove(0);
